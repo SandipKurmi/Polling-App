@@ -9,6 +9,7 @@ class Controller {
   }
 
   async insert(req, res) {
+    console.log(req.body);
     const response = await this.service.insert(req.body);
     return res.status(201).send(response);
   }
@@ -35,8 +36,6 @@ class Controller {
     const response = await this.service.delete(id);
     return res.status(response.statusCode).send(response);
   }
-
-
 }
 
 export default Controller;
