@@ -13,19 +13,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 _dotenv["default"].config();
 
-// create reusable transporter object using the default SMTP transport
-var transporter = _nodemailer["default"].createTransport({
+var transport = _nodemailer["default"].createTransport({
   host: process.env.EMAIL_HOST,
   port: process.env.EMAIL_PORT,
-  secure: false,
-  // true for 465, false for other ports
   auth: {
     user: process.env.EMAIL_USER,
-    // generated ethereal user
-    pass: process.env.EMAIL_PASS // generated ethereal password
-
+    pass: process.env.EMAIL_PASS
   }
 });
 
-var _default = transporter;
+var _default = transport;
 exports["default"] = _default;

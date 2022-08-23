@@ -100,8 +100,6 @@ class UserService extends Service {
   async forgotPassword(req, res) {
     try {
       const user = await this.model.findOne({ email: req.body.email });
-      console.log(user);
-
       if (!user) {
         return {
           error: 'There is no user with that email',
@@ -115,17 +113,13 @@ class UserService extends Service {
       });
       const link = `http://127.0.0.1:3000/api/user/reset/${user._id}/${token}`;
 
-      console.log(link);
-      // Send Email
-
       let info = await transporter.sendMail({
-        from: process.env.EMAIL_FROM,
-        to: user.email,
-        subject: 'Pool App passowrd reset link',
-        html: `<a href=${link}>Click Hear</a> to Reset Your Password`,
+        from: process.env.EMAIL_FROM, // sender address
+        to: user.email, // list of receivers
+        subject: 'Pool App passowrd reset link', // Subject line
+        text: 'Hello world?', // plain text body
+        html: `<a href=${link}>Click Hear</a> to Reset Your Password`, // html body
       });
-
-      console.log(info);
 
       return {
         error: false,

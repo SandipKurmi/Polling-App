@@ -270,10 +270,9 @@ var UserService = /*#__PURE__*/function (_Service) {
 
               case 3:
                 user = _context3.sent;
-                console.log(user);
 
                 if (user) {
-                  _context3.next = 7;
+                  _context3.next = 6;
                   break;
                 }
 
@@ -283,7 +282,7 @@ var UserService = /*#__PURE__*/function (_Service) {
                   data: null
                 });
 
-              case 7:
+              case 6:
                 secret = user._id + process.env.JWT_SECRET_KEY;
                 token = _jsonwebtoken["default"].sign({
                   userId: user._id
@@ -291,19 +290,22 @@ var UserService = /*#__PURE__*/function (_Service) {
                   expiresIn: '15m'
                 });
                 link = "http://127.0.0.1:3000/api/user/reset/".concat(user._id, "/").concat(token);
-                console.log(link); // Send Email
-
-                _context3.next = 13;
+                _context3.next = 11;
                 return _emailConfig["default"].sendMail({
                   from: process.env.EMAIL_FROM,
+                  // sender address
                   to: user.email,
+                  // list of receivers
                   subject: 'Pool App passowrd reset link',
-                  html: "<a href=".concat(link, ">Click Hear</a> to Reset Your Password")
+                  // Subject line
+                  text: 'Hello world?',
+                  // plain text body
+                  html: "<a href=".concat(link, ">Click Hear</a> to Reset Your Password") // html body
+
                 });
 
-              case 13:
+              case 11:
                 info = _context3.sent;
-                console.log(info);
                 return _context3.abrupt("return", {
                   error: false,
                   message: 'Password Reset Email Sent... Plice Check Your Email',
@@ -313,8 +315,8 @@ var UserService = /*#__PURE__*/function (_Service) {
                   data: user
                 });
 
-              case 18:
-                _context3.prev = 18;
+              case 15:
+                _context3.prev = 15;
                 _context3.t0 = _context3["catch"](0);
                 return _context3.abrupt("return", {
                   error: _context3.t0.message,
@@ -322,12 +324,12 @@ var UserService = /*#__PURE__*/function (_Service) {
                   data: null
                 });
 
-              case 21:
+              case 18:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[0, 18]]);
+        }, _callee3, this, [[0, 15]]);
       }));
 
       function forgotPassword(_x4, _x5) {
