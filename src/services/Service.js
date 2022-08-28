@@ -11,7 +11,6 @@ class Service {
   }
 
   async getAll(query) {
-
     let { skip, limit } = query;
     skip = skip ? Number(skip) : 1;
     limit = limit ? Number(limit) : 10;
@@ -43,7 +42,7 @@ class Service {
         message: 'request successfullly',
         statusCode: 200,
         total,
-        data: items
+        data: items,
       };
     } catch (error) {
       return {
@@ -53,7 +52,6 @@ class Service {
       };
     }
   }
-
 
   async get(id) {
     try {
@@ -134,7 +132,6 @@ class Service {
       };
     }
   }
-
 }
 
 export default Service;
