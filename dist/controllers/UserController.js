@@ -56,7 +56,7 @@ var UserController = /*#__PURE__*/function (_Controller) {
     _classCallCheck(this, UserController);
 
     _this = _super.call(this, service);
-    _this.addUser = _this.addUser.bind(_assertThisInitialized(_this));
+    _this.register = _this.register.bind(_assertThisInitialized(_this));
     _this.login = _this.login.bind(_assertThisInitialized(_this));
     _this.changePassword = _this.changePassword.bind(_assertThisInitialized(_this));
     _this.forgotPassword = _this.forgotPassword.bind(_assertThisInitialized(_this));
@@ -65,9 +65,9 @@ var UserController = /*#__PURE__*/function (_Controller) {
   }
 
   _createClass(UserController, [{
-    key: "addUser",
+    key: "register",
     value: function () {
-      var _addUser = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
+      var _register = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
         var hash, userData, response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
@@ -76,14 +76,16 @@ var UserController = /*#__PURE__*/function (_Controller) {
                 hash = _bcrypt["default"].hashSync(req.body.password, 10);
                 userData = req.body;
                 userData.password = hash;
-                _context.next = 5;
-                return this.service.insert(userData);
+                console.log(userData);
+                _context.next = 6;
+                return this.service.register(userData);
 
-              case 5:
+              case 6:
                 response = _context.sent;
+                console.log(response);
                 return _context.abrupt("return", res.status(response.statusCode).send(response));
 
-              case 7:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -91,11 +93,11 @@ var UserController = /*#__PURE__*/function (_Controller) {
         }, _callee, this);
       }));
 
-      function addUser(_x, _x2) {
-        return _addUser.apply(this, arguments);
+      function register(_x, _x2) {
+        return _register.apply(this, arguments);
       }
 
-      return addUser;
+      return register;
     }()
   }, {
     key: "login",

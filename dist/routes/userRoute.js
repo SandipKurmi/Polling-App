@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 var _default = function _default(router) {
   //Public Route
-  router.post("/api/register", _UserController["default"].addUser);
+  router.post("/api/register", _UserController["default"].register);
   router.post("/api/login", _UserController["default"].login);
   router.post("/api/forgotpassword", _UserController["default"].forgotPassword);
   router.post("/api/reset-password/:id/:token", _UserController["default"].userPasswordReset); //Protacted Route

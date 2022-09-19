@@ -23,27 +23,23 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
-var QuestionModle = /*#__PURE__*/function () {
-  function QuestionModle() {
-    _classCallCheck(this, QuestionModle);
+var CategoryModle = /*#__PURE__*/function () {
+  function CategoryModle() {
+    _classCallCheck(this, CategoryModle);
   }
 
-  _createClass(QuestionModle, [{
+  _createClass(CategoryModle, [{
     key: "initSchema",
     value: // eslint-disable-next-line class-methods-use-this
     function initSchema() {
       var schema = new _mongoose.Schema({
-        question: {
-          type: String,
-          required: [true, 'Please add a Question']
+        name: {
+          type: String
         },
-        options: {
-          //Array of strings
-          type: [String],
-          required: [true, 'Please add catetory'],
-          "enum": ['Economics', 'History', 'Business', 'Computer', 'Maths', 'Other']
+        description: {
+          type: String
         },
-        image: {
+        image_url: {
           type: String,
           "default": 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
         }
@@ -52,24 +48,24 @@ var QuestionModle = /*#__PURE__*/function () {
       });
       schema.plugin(_mongooseUniqueValidator["default"]);
 
-      _mongoose["default"].model('notification', schema);
+      _mongoose["default"].model('categorys', schema);
     }
   }, {
     key: "getInstance",
     value: function getInstance() {
       this.initSchema();
-      return _mongoose["default"].model('notification');
+      return _mongoose["default"].model('categorys');
     } // eslint-disable-next-line class-methods-use-this
 
   }, {
     key: "getModel",
     value: function getModel() {
-      return _mongoose["default"].model('notification');
+      return _mongoose["default"].model('categorys');
     }
   }]);
 
-  return QuestionModle;
+  return CategoryModle;
 }();
 
-var _default = QuestionModle;
+var _default = CategoryModle;
 exports["default"] = _default;

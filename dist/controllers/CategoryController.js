@@ -7,7 +7,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _Service2 = _interopRequireDefault(require("./Service"));
+var _Controller2 = _interopRequireDefault(require("./Controller"));
+
+var _CategoryModel = _interopRequireDefault(require("../models/CategoryModel"));
+
+var _CategoryService = _interopRequireDefault(require("../services/CategoryService"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -31,19 +35,22 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-var NotificationoService = /*#__PURE__*/function (_Service) {
-  _inherits(NotificationoService, _Service);
+var categoryService = new _CategoryService["default"](new _CategoryModel["default"]().getInstance());
 
-  var _super = _createSuper(NotificationoService);
+var CategoryController = /*#__PURE__*/function (_Controller) {
+  _inherits(CategoryController, _Controller);
 
-  function NotificationoService(model) {
-    _classCallCheck(this, NotificationoService);
+  var _super = _createSuper(CategoryController);
 
-    return _super.call(this, model);
+  function CategoryController(service) {
+    _classCallCheck(this, CategoryController);
+
+    return _super.call(this, service);
   }
 
-  return _createClass(NotificationoService);
-}(_Service2["default"]);
+  return _createClass(CategoryController);
+}(_Controller2["default"]);
 
-var _default = NotificationoService;
+var _default = new CategoryController(categoryService);
+
 exports["default"] = _default;

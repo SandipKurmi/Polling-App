@@ -7,13 +7,15 @@ exports["default"] = void 0;
 
 var _QuestionController = _interopRequireDefault(require("../controllers/QuestionController"));
 
+var _auth = _interopRequireDefault(require("../middleware/auth.middleware"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-// import auth from '../middleware/auth.middleware';
 var _default = function _default(router) {
   //Question api
-  router.post("/api/question", _QuestionController["default"].insert);
-  router.get("/api/question", _QuestionController["default"].getAllQuestions);
+  router.post("/api/question", _auth["default"], _QuestionController["default"].createQuestions);
+  router.get("/api/question", _auth["default"], _QuestionController["default"].getAllQuestions);
+  router["delete"]("/api/question/:id", _auth["default"], _QuestionController["default"]["delete"]);
 };
 
 exports["default"] = _default;

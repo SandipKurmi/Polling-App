@@ -33,52 +33,36 @@ var QuestionModel = /*#__PURE__*/function () {
     value: // eslint-disable-next-line class-methods-use-this
     function initSchema() {
       var schema = new _mongoose.Schema({
-        questions: [{
-          question: {
-            type: String,
-            "default": null
-          },
-          options: {
-            type: [String]
-          },
-          qUser: {
-            name: {
-              type: String,
-              "default": null
-            },
-            image: {
-              type: String,
-              "default": 'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png'
-            },
-            noOfPosts: {
-              type: Number,
-              "default": null
-            },
-            statistics: {
-              type: String,
-              "default": null
-            },
-            followers: {
-              type: Number,
-              "default": 50
-            }
-          }
-        }],
-        suggestions: [{
-          name: {
-            type: String
-          },
-          image: {
-            type: String,
-            "default": 'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png'
-          }
-        }],
-        topQuestions: [{
-          title: {
-            type: String,
-            "default": null
-          }
-        }]
+        questionTitle: {
+          type: String,
+          "default": null
+        },
+        options: {
+          type: [String],
+          "default": null
+        },
+        isPrivate: {
+          type: Boolean,
+          "default": false
+        },
+        isExpiration: {
+          type: Boolean,
+          "default": false
+        },
+        expireAt: {
+          type: Date,
+          "default": null
+        },
+        category: {
+          type: _mongoose.Schema.Types.ObjectId,
+          ref: 'categorys',
+          required: [true, 'Please add a CategoryId']
+        },
+        user: {
+          type: _mongoose.Schema.Types.ObjectId,
+          ref: 'users',
+          required: [true, 'userid required']
+        }
       }, {
         timestamps: true
       });

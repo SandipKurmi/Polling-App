@@ -83,7 +83,8 @@ var Service = /*#__PURE__*/function () {
                 _context.prev = 18;
                 _context.t0 = _context["catch"](8);
                 return _context.abrupt("return", {
-                  error: _context.t0.message,
+                  error: true,
+                  message: _context.t0.message,
                   statusCode: 400,
                   data: null
                 });
@@ -128,7 +129,8 @@ var Service = /*#__PURE__*/function () {
                 _context2.prev = 7;
                 _context2.t0 = _context2["catch"](0);
                 return _context2.abrupt("return", {
-                  error: _context2.t0.message,
+                  error: true,
+                  message: _context2.t0.message,
                   statusCode: 400,
                   data: null
                 });
@@ -173,7 +175,8 @@ var Service = /*#__PURE__*/function () {
                 _context3.prev = 7;
                 _context3.t0 = _context3["catch"](0);
                 return _context3.abrupt("return", {
-                  error: _context3.t0.message,
+                  error: true,
+                  message: _context3.t0.message,
                   statusCode: 400,
                   data: null
                 });
@@ -220,7 +223,8 @@ var Service = /*#__PURE__*/function () {
                 _context4.prev = 7;
                 _context4.t0 = _context4["catch"](0);
                 return _context4.abrupt("return", {
-                  error: _context4.t0.message,
+                  error: true,
+                  message: _context4.t0.message,
                   statusCode: 400,
                   data: null
                 });
@@ -279,7 +283,8 @@ var Service = /*#__PURE__*/function () {
                 _context5.prev = 9;
                 _context5.t0 = _context5["catch"](0);
                 return _context5.abrupt("return", {
-                  error: _context5.t0.message,
+                  error: true,
+                  message: _context5.t0.message,
                   statusCode: 400,
                   data: null
                 });

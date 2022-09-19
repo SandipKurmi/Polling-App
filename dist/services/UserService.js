@@ -54,44 +54,95 @@ var UserService = /*#__PURE__*/function (_Service) {
     _classCallCheck(this, UserService);
 
     _this = _super.call(this, model);
+    _this.register = _this.register.bind(_assertThisInitialized(_this));
     _this.login = _this.login.bind(_assertThisInitialized(_this));
     _this.changePassword = _this.changePassword.bind(_assertThisInitialized(_this));
     _this.forgotPassword = _this.forgotPassword.bind(_assertThisInitialized(_this));
+    _this.userPasswordReset = _this.userPasswordReset.bind(_assertThisInitialized(_this));
     return _this;
-  } //login user
+  } //register user
 
 
   _createClass(UserService, [{
-    key: "login",
+    key: "register",
     value: function () {
-      var _login = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(item) {
-        var user, results, token;
+      var _register = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(item) {
+        var data;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.prev = 0;
-                _context.next = 3;
+                console.log('hello');
+                _context.prev = 1;
+                _context.next = 4;
+                return this.model.create(item);
+
+              case 4:
+                data = _context.sent;
+                console.log(data);
+                return _context.abrupt("return", {
+                  error: false,
+                  message: 'user register successfullly',
+                  statusCode: 200,
+                  data: data
+                });
+
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](1);
+                return _context.abrupt("return", {
+                  error: true,
+                  message: _context.t0.message,
+                  statusCode: 400,
+                  data: null
+                });
+
+              case 12:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[1, 9]]);
+      }));
+
+      function register(_x) {
+        return _register.apply(this, arguments);
+      }
+
+      return register;
+    }() //login user
+
+  }, {
+    key: "login",
+    value: function () {
+      var _login = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(item) {
+        var user, results, token;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
                 return this.model.findOne({
                   email: item.email
                 });
 
               case 3:
-                user = _context.sent;
+                user = _context2.sent;
 
                 if (!user) {
-                  _context.next = 16;
+                  _context2.next = 16;
                   break;
                 }
 
-                _context.next = 7;
+                _context2.next = 7;
                 return _bcrypt["default"].compareSync(item.password, user.password);
 
               case 7:
-                results = _context.sent;
+                results = _context2.sent;
 
                 if (!results) {
-                  _context.next = 13;
+                  _context2.next = 13;
                   break;
                 }
 
@@ -101,7 +152,7 @@ var UserService = /*#__PURE__*/function (_Service) {
                 }, process.env.JWT_SECRET_KEY, {
                   expiresIn: '7d'
                 });
-                return _context.abrupt("return", {
+                return _context2.abrupt("return", {
                   error: false,
                   message: 'login successfully',
                   statusCode: 200,
@@ -110,45 +161,48 @@ var UserService = /*#__PURE__*/function (_Service) {
                 });
 
               case 13:
-                return _context.abrupt("return", {
-                  error: 'You entered the wrong email or password',
+                return _context2.abrupt("return", {
+                  error: true,
+                  message: 'You entered the wrong email or password',
                   statusCode: 401,
                   data: null
                 });
 
               case 14:
-                _context.next = 17;
+                _context2.next = 17;
                 break;
 
               case 16:
-                return _context.abrupt("return", {
-                  error: 'You entered the wrong email or password',
+                return _context2.abrupt("return", {
+                  error: true,
+                  message: 'You entered the wrong email or password',
                   statusCode: 401,
                   data: null
                 });
 
               case 17:
-                _context.next = 22;
+                _context2.next = 22;
                 break;
 
               case 19:
-                _context.prev = 19;
-                _context.t0 = _context["catch"](0);
-                return _context.abrupt("return", {
-                  error: _context.t0.message,
+                _context2.prev = 19;
+                _context2.t0 = _context2["catch"](0);
+                return _context2.abrupt("return", {
+                  error: true,
+                  message: _context2.t0.message,
                   statusCode: 400,
                   data: null
                 });
 
               case 22:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this, [[0, 19]]);
+        }, _callee2, this, [[0, 19]]);
       }));
 
-      function login(_x) {
+      function login(_x2) {
         return _login.apply(this, arguments);
       }
 
@@ -158,50 +212,50 @@ var UserService = /*#__PURE__*/function (_Service) {
   }, {
     key: "changePassword",
     value: function () {
-      var _changePassword = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(item, id) {
+      var _changePassword = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(item, id) {
         var user, results, hash, update;
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
+                _context3.prev = 0;
+                _context3.next = 3;
                 return this.model.findOne({
                   _id: id
                 });
 
               case 3:
-                user = _context2.sent;
+                user = _context3.sent;
 
                 if (!user) {
-                  _context2.next = 21;
+                  _context3.next = 21;
                   break;
                 }
 
-                _context2.next = 7;
+                _context3.next = 7;
                 return _bcrypt["default"].compareSync(item.currentPassword, user.password);
 
               case 7:
-                results = _context2.sent;
+                results = _context3.sent;
 
                 if (!results) {
-                  _context2.next = 18;
+                  _context3.next = 18;
                   break;
                 }
 
-                _context2.next = 11;
+                _context3.next = 11;
                 return _bcrypt["default"].hashSync(item.newPassword, 10);
 
               case 11:
-                hash = _context2.sent;
-                _context2.next = 14;
+                hash = _context3.sent;
+                _context3.next = 14;
                 return this.model.findByIdAndUpdate(user._id, {
                   password: hash
                 });
 
               case 14:
-                update = _context2.sent;
-                return _context2.abrupt("return", {
+                update = _context3.sent;
+                return _context3.abrupt("return", {
                   error: false,
                   message: 'password changed successfully',
                   statusCode: 200,
@@ -209,45 +263,45 @@ var UserService = /*#__PURE__*/function (_Service) {
                 });
 
               case 18:
-                return _context2.abrupt("return", {
+                return _context3.abrupt("return", {
                   error: 'You entered wrong currant password',
                   statusCode: 400,
                   data: null
                 });
 
               case 19:
-                _context2.next = 22;
+                _context3.next = 22;
                 break;
 
               case 21:
-                return _context2.abrupt("return", {
+                return _context3.abrupt("return", {
                   error: 'You entered wrong currant password',
                   statusCode: 400,
                   data: null
                 });
 
               case 22:
-                _context2.next = 27;
+                _context3.next = 27;
                 break;
 
               case 24:
-                _context2.prev = 24;
-                _context2.t0 = _context2["catch"](0);
-                return _context2.abrupt("return", {
-                  error: _context2.t0.message,
+                _context3.prev = 24;
+                _context3.t0 = _context3["catch"](0);
+                return _context3.abrupt("return", {
+                  error: _context3.t0.message,
                   statusCode: 400,
                   data: null
                 });
 
               case 27:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this, [[0, 24]]);
+        }, _callee3, this, [[0, 24]]);
       }));
 
-      function changePassword(_x2, _x3) {
+      function changePassword(_x3, _x4) {
         return _changePassword.apply(this, arguments);
       }
 
@@ -256,27 +310,27 @@ var UserService = /*#__PURE__*/function (_Service) {
   }, {
     key: "forgotPassword",
     value: function () {
-      var _forgotPassword = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(req, res) {
+      var _forgotPassword = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(req, res) {
         var user, secret, token, link, info;
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
-                _context3.prev = 0;
-                _context3.next = 3;
+                _context4.prev = 0;
+                _context4.next = 3;
                 return this.model.findOne({
                   email: req.body.email
                 });
 
               case 3:
-                user = _context3.sent;
+                user = _context4.sent;
 
                 if (user) {
-                  _context3.next = 6;
+                  _context4.next = 6;
                   break;
                 }
 
-                return _context3.abrupt("return", {
+                return _context4.abrupt("return", {
                   error: 'There is no user with that email',
                   statusCode: 404,
                   data: null
@@ -290,7 +344,7 @@ var UserService = /*#__PURE__*/function (_Service) {
                   expiresIn: '15m'
                 });
                 link = "http://127.0.0.1:3000/api/user/reset/".concat(user._id, "/").concat(token);
-                _context3.next = 11;
+                _context4.next = 11;
                 return _emailConfig["default"].sendMail({
                   from: process.env.EMAIL_FROM,
                   // sender address
@@ -305,8 +359,8 @@ var UserService = /*#__PURE__*/function (_Service) {
                 });
 
               case 11:
-                info = _context3.sent;
-                return _context3.abrupt("return", {
+                info = _context4.sent;
+                return _context4.abrupt("return", {
                   error: false,
                   message: 'Password Reset Email Sent... Plice Check Your Email',
                   statusCode: 200,
@@ -316,23 +370,23 @@ var UserService = /*#__PURE__*/function (_Service) {
                 });
 
               case 15:
-                _context3.prev = 15;
-                _context3.t0 = _context3["catch"](0);
-                return _context3.abrupt("return", {
-                  error: _context3.t0.message,
+                _context4.prev = 15;
+                _context4.t0 = _context4["catch"](0);
+                return _context4.abrupt("return", {
+                  error: _context4.t0.message,
                   statusCode: 400,
                   data: null
                 });
 
               case 18:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, this, [[0, 15]]);
+        }, _callee4, this, [[0, 15]]);
       }));
 
-      function forgotPassword(_x4, _x5) {
+      function forgotPassword(_x5, _x6) {
         return _forgotPassword.apply(this, arguments);
       }
 
@@ -341,54 +395,54 @@ var UserService = /*#__PURE__*/function (_Service) {
   }, {
     key: "userPasswordReset",
     value: function () {
-      var _userPasswordReset = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(req, res) {
+      var _userPasswordReset = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(req, res) {
         var _req$body, password, password_confirmation, _req$params, id, token, user, new_secret, result, hash, update;
 
-        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
                 _req$body = req.body, password = _req$body.password, password_confirmation = _req$body.password_confirmation;
                 _req$params = req.params, id = _req$params.id, token = _req$params.token;
-                _context4.next = 4;
+                _context5.next = 4;
                 return this.model.findById(id);
 
               case 4:
-                user = _context4.sent;
+                user = _context5.sent;
                 new_secret = user._id + process.env.JWT_SECRET_KEY;
-                _context4.prev = 6;
+                _context5.prev = 6;
                 result = _jsonwebtoken["default"].verify(token, new_secret);
 
                 if (!(password && password_confirmation)) {
-                  _context4.next = 22;
+                  _context5.next = 22;
                   break;
                 }
 
                 if (!(password !== password_confirmation)) {
-                  _context4.next = 13;
+                  _context5.next = 13;
                   break;
                 }
 
-                return _context4.abrupt("return", {
+                return _context5.abrupt("return", {
                   error: "Both password is not matching",
                   statusCode: 400,
                   data: null
                 });
 
               case 13:
-                _context4.next = 15;
+                _context5.next = 15;
                 return _bcrypt["default"].hashSync(password, 10);
 
               case 15:
-                hash = _context4.sent;
-                _context4.next = 18;
+                hash = _context5.sent;
+                _context5.next = 18;
                 return this.model.findByIdAndUpdate(user._id, {
                   password: hash
                 });
 
               case 18:
-                update = _context4.sent;
-                return _context4.abrupt("return", {
+                update = _context5.sent;
+                return _context5.abrupt("return", {
                   error: false,
                   message: 'password Reset successfully',
                   statusCode: 200,
@@ -396,38 +450,38 @@ var UserService = /*#__PURE__*/function (_Service) {
                 });
 
               case 20:
-                _context4.next = 23;
+                _context5.next = 23;
                 break;
 
               case 22:
-                return _context4.abrupt("return", {
+                return _context5.abrupt("return", {
                   error: "All fields are required",
                   statusCode: 400,
                   data: null
                 });
 
               case 23:
-                _context4.next = 28;
+                _context5.next = 28;
                 break;
 
               case 25:
-                _context4.prev = 25;
-                _context4.t0 = _context4["catch"](6);
-                return _context4.abrupt("return", {
-                  error: _context4.t0.message,
+                _context5.prev = 25;
+                _context5.t0 = _context5["catch"](6);
+                return _context5.abrupt("return", {
+                  error: _context5.t0.message,
                   statusCode: 400,
                   data: null
                 });
 
               case 28:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4, this, [[6, 25]]);
+        }, _callee5, this, [[6, 25]]);
       }));
 
-      function userPasswordReset(_x6, _x7) {
+      function userPasswordReset(_x7, _x8) {
         return _userPasswordReset.apply(this, arguments);
       }
 

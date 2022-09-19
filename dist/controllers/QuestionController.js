@@ -55,20 +55,21 @@ var QuestionController = /*#__PURE__*/function (_Controller) {
 
     _this = _super.call(this, service);
     _this.getAllQuestions = _this.getAllQuestions.bind(_assertThisInitialized(_this));
+    _this.createQuestions = _this.createQuestions.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(QuestionController, [{
-    key: "getAllQuestions",
+    key: "createQuestions",
     value: function () {
-      var _getAllQuestions = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
+      var _createQuestions = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
         var response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.service.getAllQuestions(req, res);
+                return this.service.createQuestions(req, res);
 
               case 2:
                 response = _context.sent;
@@ -82,7 +83,37 @@ var QuestionController = /*#__PURE__*/function (_Controller) {
         }, _callee, this);
       }));
 
-      function getAllQuestions(_x, _x2) {
+      function createQuestions(_x, _x2) {
+        return _createQuestions.apply(this, arguments);
+      }
+
+      return createQuestions;
+    }()
+  }, {
+    key: "getAllQuestions",
+    value: function () {
+      var _getAllQuestions = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(req, res) {
+        var response;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return this.service.getAllQuestions(req, res);
+
+              case 2:
+                response = _context2.sent;
+                return _context2.abrupt("return", res.status(response.statusCode).send(response));
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function getAllQuestions(_x3, _x4) {
         return _getAllQuestions.apply(this, arguments);
       }
 

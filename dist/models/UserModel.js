@@ -11,8 +11,6 @@ var _mongoose = _interopRequireWildcard(require("mongoose"));
 
 var _mongooseUniqueValidator = _interopRequireDefault(require("mongoose-unique-validator"));
 
-var _crypto = _interopRequireDefault(require("crypto"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -25,6 +23,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
+// import crypto from 'crypto';
 var UserModel = /*#__PURE__*/function () {
   function UserModel() {
     _classCallCheck(this, UserModel);
@@ -59,8 +58,10 @@ var UserModel = /*#__PURE__*/function () {
           required: [true, 'Please add a Password'],
           minlength: 6
         },
-        resetPasswordToken: String,
-        resetPasswordExpire: Date
+        image: {
+          type: String,
+          "default": 'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png'
+        }
       }, {
         timestamps: true
       });
