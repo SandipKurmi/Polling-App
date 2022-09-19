@@ -7,24 +7,19 @@ class QuestionService extends Service {
 
   async getAllQuestions(req, res) {
     try {
-      const items = await this.model.find().select(['-_id']);
+      const items = await this.model.find();
+      console.log(items);
 
-      if (items) {
-        const { questions, suggestions, topQuestions } = items[0];
-        return {
-          error: false,
-          message: 'request successfullly',
-          statusCode: 200,
-          data: {
-            questions,
-            suggestions,
-            topQuestions,
-          },
-        };
-      }
+      return {
+        error: false,
+        message: 'request successfullly',
+        statusCode: 200,
+        data: items,
+      };
     } catch (error) {
       return {
-        error: error.message,
+        error: true,
+        message: error.message,
         statusCode: 400,
         data: null,
       };

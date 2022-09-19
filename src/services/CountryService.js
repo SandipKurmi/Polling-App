@@ -21,7 +21,8 @@ class CountryService extends Service {
       }
     } catch (error) {
       return {
-        error: error.message,
+        error: true,
+        message: error.message,
         statusCode: 400,
         data: null,
       };
