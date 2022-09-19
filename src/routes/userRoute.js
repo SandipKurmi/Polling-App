@@ -3,7 +3,7 @@ import auth from '../middleware/auth.middleware';
 
 export default (router) => {
   //Public Route
-  router.post(`/api/register`, UserController.addUser);
+  router.post(`/api/register`, UserController.register);
   router.post(`/api/login`, UserController.login);
   router.post(`/api/forgotpassword`, UserController.forgotPassword);
   router.post(

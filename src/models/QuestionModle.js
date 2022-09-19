@@ -12,7 +12,7 @@ class QuestionModel {
         },
         options: {
           type: [String],
-          required: null,
+          default: null,
         },
         isPrivate: {
           type: Boolean,
@@ -24,16 +24,17 @@ class QuestionModel {
         },
         expireAt: {
           type: Date,
-          expires: '2m',
-          default: Date.now,
+          default: null,
         },
-        categoryId: {
+        category: {
           type: Schema.Types.ObjectId,
           ref: 'categorys',
+          required: [true, 'Please add a CategoryId'],
         },
-        userId: {
+        user: {
           type: Schema.Types.ObjectId,
           ref: 'users',
+          required: [true, 'userid required'],
         },
       },
       {

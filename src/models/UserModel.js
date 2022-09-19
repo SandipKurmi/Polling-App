@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
-import crypto from 'crypto';
+// import crypto from 'crypto';
 
 class UserModel {
   // eslint-disable-next-line class-methods-use-this
@@ -34,8 +34,11 @@ class UserModel {
           required: [true, 'Please add a Password'],
           minlength: 6,
         },
-        resetPasswordToken: String,
-        resetPasswordExpire: Date,
+        image: {
+          type: String,
+          default:
+            'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png',
+        },
       },
       {
         timestamps: true,

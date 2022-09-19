@@ -8,18 +8,20 @@ const userService = new UserService(new User().getInstance());
 class UserController extends Controller {
   constructor(service) {
     super(service);
-    this.addUser = this.addUser.bind(this);
+    this.register = this.register.bind(this);
     this.login = this.login.bind(this);
     this.changePassword = this.changePassword.bind(this);
     this.forgotPassword = this.forgotPassword.bind(this);
     this.userPasswordReset = this.userPasswordReset.bind(this);
   }
 
-  async addUser(req, res) {
+  async register(req, res) {
     const hash = bcrypt.hashSync(req.body.password, 10);
     var userData = req.body;
     userData.password = hash;
-    let response = await this.service.insert(userData);
+    console.log(userData);
+    let response = await this.service.register(userData);
+    console.log(response);
     return res.status(response.statusCode).send(response);
   }
 

@@ -6,9 +6,33 @@ import transporter from '../config/emailConfig';
 class UserService extends Service {
   constructor(model) {
     super(model);
+    this.register = this.register.bind(this);
     this.login = this.login.bind(this);
     this.changePassword = this.changePassword.bind(this);
     this.forgotPassword = this.forgotPassword.bind(this);
+    this.userPasswordReset = this.userPasswordReset.bind(this);
+  }
+
+  //register user
+  async register(item) {
+    console.log('hello');
+    try {
+      const data = await this.model.create(item);
+      console.log(data);
+      return {
+        error: false,
+        message: 'user register successfullly',
+        statusCode: 200,
+        data: data,
+      };
+    } catch (error) {
+      return {
+        error: true,
+        message: error.message,
+        statusCode: 400,
+        data: null,
+      };
+    }
   }
 
   //login user

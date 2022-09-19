@@ -8,6 +8,12 @@ class QuestionController extends Controller {
   constructor(service) {
     super(service);
     this.getAllQuestions = this.getAllQuestions.bind(this);
+    this.createQuestions = this.createQuestions.bind(this);
+  }
+
+  async createQuestions(req, res) {
+    let response = await this.service.createQuestions(req, res);
+    return res.status(response.statusCode).send(response);
   }
 
   async getAllQuestions(req, res) {
