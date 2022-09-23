@@ -7,9 +7,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _Service2 = _interopRequireDefault(require("./Service"));
+var _Controller2 = _interopRequireDefault(require("./Controller"));
 
-var _jsonwebtoken = require("jsonwebtoken");
+var _BookmarkModel = _interopRequireDefault(require("../models/BookmarkModel"));
+
+var _BookmarkService = _interopRequireDefault(require("../services/BookmarkService"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -39,180 +41,58 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-var QuestionService = /*#__PURE__*/function (_Service) {
-  _inherits(QuestionService, _Service);
+var bookmarkService = new _BookmarkService["default"](new _BookmarkModel["default"]().getInstance());
 
-  var _super = _createSuper(QuestionService);
+var BookmarkController = /*#__PURE__*/function (_Controller) {
+  _inherits(BookmarkController, _Controller);
 
-  function QuestionService(model) {
+  var _super = _createSuper(BookmarkController);
+
+  function BookmarkController(service) {
     var _this;
 
-    _classCallCheck(this, QuestionService);
+    _classCallCheck(this, BookmarkController);
 
-    _this = _super.call(this, model);
-    _this.getAllQuestions = _this.getAllQuestions.bind(_assertThisInitialized(_this));
-    _this.createQuestions = _this.createQuestions.bind(_assertThisInitialized(_this));
+    _this = _super.call(this, service);
+    _this.getAllBookmark = _this.getAllBookmark.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(QuestionService, [{
-    key: "createQuestions",
+  _createClass(BookmarkController, [{
+    key: "getAllBookmark",
     value: function () {
-      var _createQuestions = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
-        var token, decoded, id, _req$body, questionTitle, options, isPrivate, isExpiration, category, expireAt, questionData, data;
-
+      var _getAllBookmark = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
+        var response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.prev = 0;
+                _context.next = 2;
+                return this.service.getAllBookmark(req, res);
 
-                if (!req.headers.authorization) {
-                  _context.next = 13;
-                  break;
-                }
+              case 2:
+                response = _context.sent;
+                return _context.abrupt("return", res.status(response.statusCode).send(response));
 
-                token = req.headers.authorization.replace('Bearer ', '');
-                decoded = (0, _jsonwebtoken.verify)(token, process.env.JWT_SECRET_KEY);
-                id = decoded.id; // let expireAt = null;
-
-                _req$body = req.body, questionTitle = _req$body.questionTitle, options = _req$body.options, isPrivate = _req$body.isPrivate, isExpiration = _req$body.isExpiration, category = _req$body.category, expireAt = _req$body.expireAt; // if (isExpiration) {
-                //   expireAt = new Date();
-                // }
-
-                questionData = {
-                  questionTitle: questionTitle,
-                  options: options,
-                  isPrivate: isPrivate,
-                  isExpiration: isExpiration,
-                  expireAt: expireAt,
-                  category: category,
-                  user: id
-                };
-
-                if (questionData) {
-                  _context.next = 9;
-                  break;
-                }
-
-                return _context.abrupt("return", {
-                  error: true,
-                  message: 'error while saving question',
-                  statusCode: 400,
-                  data: null
-                });
-
-              case 9:
-                _context.next = 11;
-                return this.model.create(questionData);
-
-              case 11:
-                data = _context.sent;
-                return _context.abrupt("return", {
-                  error: false,
-                  message: 'Question save successfully',
-                  statusCode: 200,
-                  data: data
-                });
-
-              case 13:
-                _context.next = 18;
-                break;
-
-              case 15:
-                _context.prev = 15;
-                _context.t0 = _context["catch"](0);
-                return _context.abrupt("return", {
-                  error: true,
-                  message: _context.t0.message,
-                  statusCode: 400,
-                  data: null
-                });
-
-              case 18:
+              case 4:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 15]]);
+        }, _callee, this);
       }));
 
-      function createQuestions(_x, _x2) {
-        return _createQuestions.apply(this, arguments);
+      function getAllBookmark(_x, _x2) {
+        return _getAllBookmark.apply(this, arguments);
       }
 
-      return createQuestions;
-    }()
-  }, {
-    key: "getAllQuestions",
-    value: function () {
-      var _getAllQuestions = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(req, res) {
-        var items, suggestion;
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
-                return this.model.find({
-                  isPrivate: false
-                }).populate({
-                  path: 'category',
-                  select: 'name description image_url'
-                });
-
-              case 3:
-                items = _context2.sent;
-                _context2.next = 6;
-                return this.model.find({
-                  isPrivate: false,
-                  createdAt: {
-                    $gte: new Date(new Date().getTime() - 15 * 24 * 60 * 60 * 1000)
-                  }
-                }).sort({
-                  createdAt: -1
-                }).limit(5);
-
-              case 6:
-                suggestion = _context2.sent;
-                return _context2.abrupt("return", {
-                  error: false,
-                  message: 'request successfully',
-                  statusCode: 200,
-                  data: {
-                    questions: items,
-                    suggestion: suggestion
-                  }
-                });
-
-              case 10:
-                _context2.prev = 10;
-                _context2.t0 = _context2["catch"](0);
-                return _context2.abrupt("return", {
-                  error: true,
-                  message: _context2.t0.message,
-                  statusCode: 400,
-                  data: null
-                });
-
-              case 13:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this, [[0, 10]]);
-      }));
-
-      function getAllQuestions(_x3, _x4) {
-        return _getAllQuestions.apply(this, arguments);
-      }
-
-      return getAllQuestions;
+      return getAllBookmark;
     }()
   }]);
 
-  return QuestionService;
-}(_Service2["default"]);
+  return BookmarkController;
+}(_Controller2["default"]);
 
-var _default = QuestionService;
+var _default = new BookmarkController(bookmarkService);
+
 exports["default"] = _default;

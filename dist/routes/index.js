@@ -13,6 +13,8 @@ var _questionRoute = _interopRequireDefault(require("./questionRoute"));
 
 var _categoryRoute = _interopRequireDefault(require("./categoryRoute"));
 
+var _bookmarkRoute = _interopRequireDefault(require("./bookmarkRoute"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var router = _express["default"].Router();
@@ -20,5 +22,6 @@ var router = _express["default"].Router();
 (0, _userRoute["default"])(router);
 (0, _questionRoute["default"])(router);
 (0, _categoryRoute["default"])(router);
+(0, _bookmarkRoute["default"])(router);
 var _default = router;
 exports["default"] = _default;

@@ -23,55 +23,49 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
-var CategoryModle = /*#__PURE__*/function () {
-  function CategoryModle() {
-    _classCallCheck(this, CategoryModle);
+var BookmarkModle = /*#__PURE__*/function () {
+  function BookmarkModle() {
+    _classCallCheck(this, BookmarkModle);
   }
 
-  _createClass(CategoryModle, [{
+  _createClass(BookmarkModle, [{
     key: "initSchema",
     value: // eslint-disable-next-line class-methods-use-this
     function initSchema() {
       var schema = new _mongoose.Schema({
-        name: {
-          type: String,
-          "default": null
+        user: {
+          type: _mongoose.Schema.Types.ObjectId,
+          ref: 'users',
+          required: [true, 'userid required']
         },
-        description: {
-          type: String,
-          "default": null
-        },
-        image_url: {
-          type: String,
-          "default": 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
-        },
-        category_icon: {
-          type: String,
-          "default": 'https://images.unsplash.com/photo-1661961111247-e218f67d1cd2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80'
+        question: {
+          type: _mongoose.Schema.Types.ObjectId,
+          ref: 'questions',
+          required: [true, 'questionid required']
         }
       }, {
         timestamps: true
       });
       schema.plugin(_mongooseUniqueValidator["default"]);
 
-      _mongoose["default"].model('categorys', schema);
+      _mongoose["default"].model('bookmarks', schema);
     }
   }, {
     key: "getInstance",
     value: function getInstance() {
       this.initSchema();
-      return _mongoose["default"].model('categorys');
+      return _mongoose["default"].model('bookmarks');
     } // eslint-disable-next-line class-methods-use-this
 
   }, {
     key: "getModel",
     value: function getModel() {
-      return _mongoose["default"].model('categorys');
+      return _mongoose["default"].model('bookmarks');
     }
   }]);
 
-  return CategoryModle;
+  return BookmarkModle;
 }();
 
-var _default = CategoryModle;
+var _default = BookmarkModle;
 exports["default"] = _default;

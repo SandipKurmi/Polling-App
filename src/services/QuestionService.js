@@ -84,7 +84,7 @@ class QuestionService extends Service {
 
       return {
         error: false,
-        message: 'request successfullly',
+        message: 'request successfully',
         statusCode: 200,
         data: {
           questions: items,
