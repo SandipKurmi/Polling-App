@@ -71,7 +71,10 @@ class QuestionService extends Service {
       const items = await this.model
         .find({ isPrivate: false })
         .populate({ path: 'category', select: 'name description image_url' })
-        .populate('user');
+        .populate({
+          path: 'user',
+          select: 'name image statistics posts followers',
+        });
 
       const topQuestion = await this.model
         .find({
@@ -80,6 +83,8 @@ class QuestionService extends Service {
             $gte: new Date(new Date().getTime() - 15 * 24 * 60 * 60 * 1000),
           },
         })
+        .populate({ path: 'category', select: 'name image_url' })
+        .select(['questionTitle'])
         .sort({ createdAt: -1 })
         .limit(5);
 

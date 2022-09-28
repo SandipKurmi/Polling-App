@@ -48,7 +48,7 @@ var Service = /*#__PURE__*/function () {
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return this.model.find().limit(5);
+                return this.model.find().select(['name', 'image']).limit(5);
 
               case 3:
                 data = _context.sent;

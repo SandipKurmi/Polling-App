@@ -159,7 +159,10 @@ var QuestionService = /*#__PURE__*/function (_Service) {
                 }).populate({
                   path: 'category',
                   select: 'name description image_url'
-                }).populate('user');
+                }).populate({
+                  path: 'user',
+                  select: 'name image statistics posts followers'
+                });
 
               case 3:
                 items = _context2.sent;
@@ -169,7 +172,10 @@ var QuestionService = /*#__PURE__*/function (_Service) {
                   createdAt: {
                     $gte: new Date(new Date().getTime() - 15 * 24 * 60 * 60 * 1000)
                   }
-                }).sort({
+                }).populate({
+                  path: 'category',
+                  select: 'name image_url'
+                }).select(['questionTitle']).sort({
                   createdAt: -1
                 }).limit(5);
 

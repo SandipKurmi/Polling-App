@@ -14,7 +14,7 @@ class Service {
   //user suggetion
   async getUserSuggetions(req, res) {
     try {
-      const data = await this.model.find().limit(5);
+      const data = await this.model.find().select(['name', 'image']).limit(5);
 
       return {
         error: false,

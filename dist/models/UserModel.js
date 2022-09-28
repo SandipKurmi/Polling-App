@@ -63,13 +63,17 @@ var UserModel = /*#__PURE__*/function () {
           "default": 'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png'
         },
         followers: {
-          type: Array,
-          "default": []
+          type: Number,
+          "default": 0
         },
-        followings: {
-          type: Array,
-          "default": []
-        },
+        // followers: {
+        //   type: Array,
+        //   default: [],
+        // },
+        // followings: {
+        //   type: Array,
+        //   default: [],
+        // },
         isAdmin: {
           type: Boolean,
           "default": false
