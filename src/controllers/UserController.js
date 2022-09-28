@@ -15,13 +15,16 @@ class UserController extends Controller {
     this.userPasswordReset = this.userPasswordReset.bind(this);
   }
 
+  // async getUserSuggetions(req, res) {
+  //   const response = await this.service.getUserSuggetions(req, res);
+  //   return res.status(response.statusCode).send(response);
+  // }
+
   async register(req, res) {
     const hash = bcrypt.hashSync(req.body.password, 10);
     var userData = req.body;
     userData.password = hash;
-    console.log(userData);
     let response = await this.service.register(userData);
-    console.log(response);
     return res.status(response.statusCode).send(response);
   }
 

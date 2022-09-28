@@ -8,6 +8,28 @@ class Service {
     this.update = this.update.bind(this);
     this.delete = this.delete.bind(this);
     this.get = this.get.bind(this);
+    this.getUserSuggetions = this.getUserSuggetions.bind(this);
+  }
+
+  //user suggetion
+  async getUserSuggetions(req, res) {
+    try {
+      const data = await this.model.find().limit(5);
+
+      return {
+        error: false,
+        message: 'request successfully',
+        statusCode: 200,
+        data,
+      };
+    } catch (error) {
+      return {
+        error: true,
+        message: 'user already exists',
+        statusCode: 400,
+        data: null,
+      };
+    }
   }
 
   async getAll(query) {

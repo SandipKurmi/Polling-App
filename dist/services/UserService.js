@@ -92,7 +92,7 @@ var UserService = /*#__PURE__*/function (_Service) {
                 _context.t0 = _context["catch"](1);
                 return _context.abrupt("return", {
                   error: true,
-                  message: _context.t0.message,
+                  message: 'user already exists',
                   statusCode: 400,
                   data: null
                 });

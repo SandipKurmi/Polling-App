@@ -70,9 +70,10 @@ class QuestionService extends Service {
     try {
       const items = await this.model
         .find({ isPrivate: false })
-        .populate({ path: 'category', select: 'name description image_url' });
+        .populate({ path: 'category', select: 'name description image_url' })
+        .populate('user');
 
-      const suggestion = await this.model
+      const topQuestion = await this.model
         .find({
           isPrivate: false,
           createdAt: {
@@ -88,7 +89,7 @@ class QuestionService extends Service {
         statusCode: 200,
         data: {
           questions: items,
-          suggestion,
+          topQuestion,
         },
       };
     } catch (error) {

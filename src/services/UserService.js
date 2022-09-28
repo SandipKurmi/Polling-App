@@ -28,7 +28,7 @@ class UserService extends Service {
     } catch (error) {
       return {
         error: true,
-        message: error.message,
+        message: 'user already exists',
         statusCode: 400,
         data: null,
       };

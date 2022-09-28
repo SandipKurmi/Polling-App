@@ -1,12 +1,16 @@
 import Controller from './Controller';
 import Question from '../models/QuestionModle';
 import QuestionService from '../services/QuestionService';
-
 const questionService = new QuestionService(new Question().getInstance());
 
+import User from '../models/UserModel';
+import UserService from '../services/UserService';
+const userService = new UserService(new User().getModel());
+
 class QuestionController extends Controller {
-  constructor(service) {
+  constructor(service, userService) {
     super(service);
+    this.userService = userService;
     this.getAllQuestions = this.getAllQuestions.bind(this);
     this.createQuestions = this.createQuestions.bind(this);
   }
@@ -18,7 +22,11 @@ class QuestionController extends Controller {
 
   async getAllQuestions(req, res) {
     let response = await this.service.getAllQuestions(req, res);
+    if (response) {
+      const { data } = await this.userService.getUserSuggetions();
+      response.data.suggetions = data;
+    }
     return res.status(response.statusCode).send(response);
   }
 }
-export default new QuestionController(questionService);
+export default new QuestionController(questionService, userService);

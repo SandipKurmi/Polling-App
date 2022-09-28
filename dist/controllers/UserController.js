@@ -62,7 +62,11 @@ var UserController = /*#__PURE__*/function (_Controller) {
     _this.forgotPassword = _this.forgotPassword.bind(_assertThisInitialized(_this));
     _this.userPasswordReset = _this.userPasswordReset.bind(_assertThisInitialized(_this));
     return _this;
-  }
+  } // async getUserSuggetions(req, res) {
+  //   const response = await this.service.getUserSuggetions(req, res);
+  //   return res.status(response.statusCode).send(response);
+  // }
+
 
   _createClass(UserController, [{
     key: "register",
@@ -76,16 +80,14 @@ var UserController = /*#__PURE__*/function (_Controller) {
                 hash = _bcrypt["default"].hashSync(req.body.password, 10);
                 userData = req.body;
                 userData.password = hash;
-                console.log(userData);
-                _context.next = 6;
+                _context.next = 5;
                 return this.service.register(userData);
 
-              case 6:
+              case 5:
                 response = _context.sent;
-                console.log(response);
                 return _context.abrupt("return", res.status(response.statusCode).send(response));
 
-              case 9:
+              case 7:
               case "end":
                 return _context.stop();
             }

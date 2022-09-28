@@ -147,7 +147,7 @@ var QuestionService = /*#__PURE__*/function (_Service) {
     key: "getAllQuestions",
     value: function () {
       var _getAllQuestions = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(req, res) {
-        var items, suggestion;
+        var items, topQuestion;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -159,7 +159,7 @@ var QuestionService = /*#__PURE__*/function (_Service) {
                 }).populate({
                   path: 'category',
                   select: 'name description image_url'
-                });
+                }).populate('user');
 
               case 3:
                 items = _context2.sent;
@@ -174,14 +174,14 @@ var QuestionService = /*#__PURE__*/function (_Service) {
                 }).limit(5);
 
               case 6:
-                suggestion = _context2.sent;
+                topQuestion = _context2.sent;
                 return _context2.abrupt("return", {
                   error: false,
                   message: 'request successfully',
                   statusCode: 200,
                   data: {
                     questions: items,
-                    suggestion: suggestion
+                    topQuestion: topQuestion
                   }
                 });
 

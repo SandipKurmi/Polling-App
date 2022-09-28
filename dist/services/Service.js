@@ -33,16 +33,64 @@ var Service = /*#__PURE__*/function () {
     this.update = this.update.bind(this);
     this["delete"] = this["delete"].bind(this);
     this.get = this.get.bind(this);
-  }
+    this.getUserSuggetions = this.getUserSuggetions.bind(this);
+  } //user suggetion
+
 
   _createClass(Service, [{
-    key: "getAll",
+    key: "getUserSuggetions",
     value: function () {
-      var _getAll = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(query) {
-        var skip, limit, id, items, total;
+      var _getUserSuggetions = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
+        var data;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return this.model.find().limit(5);
+
+              case 3:
+                data = _context.sent;
+                return _context.abrupt("return", {
+                  error: false,
+                  message: 'request successfully',
+                  statusCode: 200,
+                  data: data
+                });
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](0);
+                return _context.abrupt("return", {
+                  error: true,
+                  message: 'user already exists',
+                  statusCode: 400,
+                  data: null
+                });
+
+              case 10:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[0, 7]]);
+      }));
+
+      function getUserSuggetions(_x, _x2) {
+        return _getUserSuggetions.apply(this, arguments);
+      }
+
+      return getUserSuggetions;
+    }()
+  }, {
+    key: "getAll",
+    value: function () {
+      var _getAll = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(query) {
+        var skip, limit, id, items, total;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 skip = query.skip, limit = query.limit;
                 skip = skip ? Number(skip) : 1;
@@ -60,18 +108,18 @@ var Service = /*#__PURE__*/function () {
                   }
                 }
 
-                _context.prev = 8;
-                _context.next = 11;
+                _context2.prev = 8;
+                _context2.next = 11;
                 return this.model.find(query).select(['-password']).skip(skip).limit(limit);
 
               case 11:
-                items = _context.sent;
-                _context.next = 14;
+                items = _context2.sent;
+                _context2.next = 14;
                 return this.model.countDocuments();
 
               case 14:
-                total = _context.sent;
-                return _context.abrupt("return", {
+                total = _context2.sent;
+                return _context2.abrupt("return", {
                   error: false,
                   message: 'request successfullly',
                   statusCode: 200,
@@ -80,24 +128,24 @@ var Service = /*#__PURE__*/function () {
                 });
 
               case 18:
-                _context.prev = 18;
-                _context.t0 = _context["catch"](8);
-                return _context.abrupt("return", {
+                _context2.prev = 18;
+                _context2.t0 = _context2["catch"](8);
+                return _context2.abrupt("return", {
                   error: true,
-                  message: _context.t0.message,
+                  message: _context2.t0.message,
                   statusCode: 400,
                   data: null
                 });
 
               case 21:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this, [[8, 18]]);
+        }, _callee2, this, [[8, 18]]);
       }));
 
-      function getAll(_x) {
+      function getAll(_x3) {
         return _getAll.apply(this, arguments);
       }
 
@@ -106,69 +154,23 @@ var Service = /*#__PURE__*/function () {
   }, {
     key: "get",
     value: function () {
-      var _get = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(id) {
+      var _get = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(id) {
         var items;
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
-                return this.model.findById(id).select(['-password']);
-
-              case 3:
-                items = _context2.sent;
-                return _context2.abrupt("return", {
-                  error: false,
-                  message: 'request successfullly',
-                  statusCode: 200,
-                  data: items
-                });
-
-              case 7:
-                _context2.prev = 7;
-                _context2.t0 = _context2["catch"](0);
-                return _context2.abrupt("return", {
-                  error: true,
-                  message: _context2.t0.message,
-                  statusCode: 400,
-                  data: null
-                });
-
-              case 10:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this, [[0, 7]]);
-      }));
-
-      function get(_x2) {
-        return _get.apply(this, arguments);
-      }
-
-      return get;
-    }()
-  }, {
-    key: "insert",
-    value: function () {
-      var _insert = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(item) {
-        var data;
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.prev = 0;
                 _context3.next = 3;
-                return this.model.create(item);
+                return this.model.findById(id).select(['-password']);
 
               case 3:
-                data = _context3.sent;
+                items = _context3.sent;
                 return _context3.abrupt("return", {
                   error: false,
-                  message: 'successfully inserted',
-                  statusCode: 201,
-                  data: data
+                  message: 'request successfullly',
+                  statusCode: 200,
+                  data: items
                 });
 
               case 7:
@@ -189,16 +191,16 @@ var Service = /*#__PURE__*/function () {
         }, _callee3, this, [[0, 7]]);
       }));
 
-      function insert(_x3) {
-        return _insert.apply(this, arguments);
+      function get(_x4) {
+        return _get.apply(this, arguments);
       }
 
-      return insert;
+      return get;
     }()
   }, {
-    key: "update",
+    key: "insert",
     value: function () {
-      var _update = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(id, item) {
+      var _insert = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(item) {
         var data;
         return _regeneratorRuntime().wrap(function _callee4$(_context4) {
           while (1) {
@@ -206,16 +208,14 @@ var Service = /*#__PURE__*/function () {
               case 0:
                 _context4.prev = 0;
                 _context4.next = 3;
-                return this.model.findByIdAndUpdate(id, item, {
-                  "new": true
-                });
+                return this.model.create(item);
 
               case 3:
                 data = _context4.sent;
                 return _context4.abrupt("return", {
                   error: false,
-                  message: 'successfully updated',
-                  statusCode: 200,
+                  message: 'successfully inserted',
+                  statusCode: 201,
                   data: data
                 });
 
@@ -237,50 +237,38 @@ var Service = /*#__PURE__*/function () {
         }, _callee4, this, [[0, 7]]);
       }));
 
-      function update(_x4, _x5) {
-        return _update.apply(this, arguments);
+      function insert(_x5) {
+        return _insert.apply(this, arguments);
       }
 
-      return update;
+      return insert;
     }()
   }, {
-    key: "delete",
+    key: "update",
     value: function () {
-      var _delete2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(id) {
-        var item;
+      var _update = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(id, item) {
+        var data;
         return _regeneratorRuntime().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
                 _context5.prev = 0;
                 _context5.next = 3;
-                return this.model.findByIdAndDelete(id);
+                return this.model.findByIdAndUpdate(id, item, {
+                  "new": true
+                });
 
               case 3:
-                item = _context5.sent;
-
-                if (item) {
-                  _context5.next = 6;
-                  break;
-                }
-
-                return _context5.abrupt("return", {
-                  error: true,
-                  message: 'item not found',
-                  statusCode: 404,
-                  data: null
-                });
-
-              case 6:
+                data = _context5.sent;
                 return _context5.abrupt("return", {
                   error: false,
-                  message: 'record delete successfullly!',
+                  message: 'successfully updated',
                   statusCode: 200,
-                  data: item
+                  data: data
                 });
 
-              case 9:
-                _context5.prev = 9;
+              case 7:
+                _context5.prev = 7;
                 _context5.t0 = _context5["catch"](0);
                 return _context5.abrupt("return", {
                   error: true,
@@ -289,15 +277,75 @@ var Service = /*#__PURE__*/function () {
                   data: null
                 });
 
-              case 12:
+              case 10:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, this, [[0, 9]]);
+        }, _callee5, this, [[0, 7]]);
       }));
 
-      function _delete(_x6) {
+      function update(_x6, _x7) {
+        return _update.apply(this, arguments);
+      }
+
+      return update;
+    }()
+  }, {
+    key: "delete",
+    value: function () {
+      var _delete2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(id) {
+        var item;
+        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _context6.prev = 0;
+                _context6.next = 3;
+                return this.model.findByIdAndDelete(id);
+
+              case 3:
+                item = _context6.sent;
+
+                if (item) {
+                  _context6.next = 6;
+                  break;
+                }
+
+                return _context6.abrupt("return", {
+                  error: true,
+                  message: 'item not found',
+                  statusCode: 404,
+                  data: null
+                });
+
+              case 6:
+                return _context6.abrupt("return", {
+                  error: false,
+                  message: 'record delete successfullly!',
+                  statusCode: 200,
+                  data: item
+                });
+
+              case 9:
+                _context6.prev = 9;
+                _context6.t0 = _context6["catch"](0);
+                return _context6.abrupt("return", {
+                  error: true,
+                  message: _context6.t0.message,
+                  statusCode: 400,
+                  data: null
+                });
+
+              case 12:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this, [[0, 9]]);
+      }));
+
+      function _delete(_x8) {
         return _delete2.apply(this, arguments);
       }
 

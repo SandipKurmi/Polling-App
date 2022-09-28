@@ -26,7 +26,7 @@ class UserModel {
           default: 'user',
         },
         phoneNumber: {
-          type: Number,
+          type: String,
           required: [true, 'Please add a Mobile Number'],
         },
         password: {
@@ -38,6 +38,26 @@ class UserModel {
           type: String,
           default:
             'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png',
+        },
+        followers: {
+          type: Array,
+          default: [],
+        },
+        followings: {
+          type: Array,
+          default: [],
+        },
+        isAdmin: {
+          type: Boolean,
+          default: false,
+        },
+        statistics: {
+          type: Number,
+          default: null,
+        },
+        posts: {
+          type: Number,
+          default: null,
         },
       },
       {
