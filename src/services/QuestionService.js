@@ -6,6 +6,7 @@ class QuestionService extends Service {
     super(model);
     this.getAllQuestions = this.getAllQuestions.bind(this);
     this.createQuestions = this.createQuestions.bind(this);
+    this.allNotification = this.allNotification.bind(this);
   }
 
   async createQuestions(req, res) {
@@ -96,6 +97,30 @@ class QuestionService extends Service {
           questions: items,
           topQuestion,
         },
+      };
+    } catch (error) {
+      return {
+        error: true,
+        message: error.message,
+        statusCode: 400,
+        data: null,
+      };
+    }
+  }
+
+  async allNotification(req, res) {
+    try {
+      const data = await this.model
+        .find({ isPrivate: false })
+        .populate({ path: 'category', select: 'name ' })
+        .populate({ path: 'user', select: 'name image' })
+        .select(['questionTitle']);
+
+      return {
+        error: false,
+        message: 'request successfully',
+        statusCode: 200,
+        data,
       };
     } catch (error) {
       return {

@@ -67,29 +67,66 @@ var UserService = /*#__PURE__*/function (_Service) {
     key: "register",
     value: function () {
       var _register = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(item) {
-        var data;
+        var user, data, token;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log('hello');
-                _context.prev = 1;
-                _context.next = 4;
+                _context.prev = 0;
+                _context.next = 3;
+                return this.model.findOne({
+                  email: item.email
+                });
+
+              case 3:
+                user = _context.sent;
+
+                if (!user) {
+                  _context.next = 6;
+                  break;
+                }
+
+                return _context.abrupt("return", {
+                  error: true,
+                  message: 'User already exist',
+                  statusCode: 200,
+                  data: null
+                });
+
+              case 6:
+                _context.next = 8;
                 return this.model.create(item);
 
-              case 4:
+              case 8:
                 data = _context.sent;
-                console.log(data);
+
+                if (!data) {
+                  _context.next = 12;
+                  break;
+                }
+
+                token = _jsonwebtoken["default"].sign({
+                  id: data._id,
+                  email: data.email
+                }, process.env.JWT_SECRET_KEY, {
+                  expiresIn: '7d'
+                });
                 return _context.abrupt("return", {
                   error: false,
                   message: 'user register successfullly',
                   statusCode: 200,
+                  token: token,
                   data: data
                 });
 
-              case 9:
-                _context.prev = 9;
-                _context.t0 = _context["catch"](1);
+              case 12:
+                _context.next = 18;
+                break;
+
+              case 14:
+                _context.prev = 14;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
                 return _context.abrupt("return", {
                   error: true,
                   message: 'user already exists',
@@ -97,12 +134,12 @@ var UserService = /*#__PURE__*/function (_Service) {
                   data: null
                 });
 
-              case 12:
+              case 18:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[1, 9]]);
+        }, _callee, this, [[0, 14]]);
       }));
 
       function register(_x) {
@@ -362,11 +399,9 @@ var UserService = /*#__PURE__*/function (_Service) {
                 info = _context4.sent;
                 return _context4.abrupt("return", {
                   error: false,
-                  message: 'Password Reset Email Sent... Plice Check Your Email',
+                  message: 'Password Reset Email Sent... please Check Your Email',
                   statusCode: 200,
-                  info: info,
-                  link: link,
-                  data: user
+                  link: link
                 });
 
               case 15:

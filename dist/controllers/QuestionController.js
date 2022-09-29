@@ -62,6 +62,7 @@ var QuestionController = /*#__PURE__*/function (_Controller) {
     _this.userService = userService;
     _this.getAllQuestions = _this.getAllQuestions.bind(_assertThisInitialized(_this));
     _this.createQuestions = _this.createQuestions.bind(_assertThisInitialized(_this));
+    _this.allNotification = _this.allNotification.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -140,6 +141,36 @@ var QuestionController = /*#__PURE__*/function (_Controller) {
       }
 
       return getAllQuestions;
+    }()
+  }, {
+    key: "allNotification",
+    value: function () {
+      var _allNotification = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(req, res) {
+        var response;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return this.service.allNotification(req, res);
+
+              case 2:
+                response = _context3.sent;
+                return _context3.abrupt("return", res.status(response.statusCode).send(response));
+
+              case 4:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function allNotification(_x5, _x6) {
+        return _allNotification.apply(this, arguments);
+      }
+
+      return allNotification;
     }()
   }]);
 

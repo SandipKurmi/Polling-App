@@ -15,7 +15,9 @@ var _default = function _default(router) {
   //Question api
   router.post("/api/question", _auth["default"], _QuestionController["default"].createQuestions);
   router.get("/api/question", _auth["default"], _QuestionController["default"].getAllQuestions);
-  router["delete"]("/api/question/:id", _auth["default"], _QuestionController["default"]["delete"]);
+  router["delete"]("/api/question/:id", _auth["default"], _QuestionController["default"]["delete"]); //notification
+
+  router.get("/api/notification", _auth["default"], _QuestionController["default"].allNotification);
 };
 
 exports["default"] = _default;

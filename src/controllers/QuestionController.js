@@ -13,6 +13,7 @@ class QuestionController extends Controller {
     this.userService = userService;
     this.getAllQuestions = this.getAllQuestions.bind(this);
     this.createQuestions = this.createQuestions.bind(this);
+    this.allNotification = this.allNotification.bind(this);
   }
 
   async createQuestions(req, res) {
@@ -26,6 +27,11 @@ class QuestionController extends Controller {
       const { data } = await this.userService.getUserSuggetions();
       response.data.suggetions = data;
     }
+    return res.status(response.statusCode).send(response);
+  }
+
+  async allNotification(req, res) {
+    let response = await this.service.allNotification(req, res);
     return res.status(response.statusCode).send(response);
   }
 }

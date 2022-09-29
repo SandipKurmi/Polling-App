@@ -75,9 +75,10 @@ var Controller = /*#__PURE__*/function () {
 
               case 2:
                 response = _context2.sent;
+                console.log(response);
                 return _context2.abrupt("return", res.status(response.statusCode).send(response));
 
-              case 4:
+              case 5:
               case "end":
                 return _context2.stop();
             }

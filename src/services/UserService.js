@@ -15,17 +15,36 @@ class UserService extends Service {
 
   //register user
   async register(item) {
-    console.log('hello');
     try {
+      const user = await this.model.findOne({ email: item.email });
+      if (user) {
+        return {
+          error: true,
+          message: 'User already exist',
+          statusCode: 200,
+          data: null,
+        };
+      }
+
       const data = await this.model.create(item);
-      console.log(data);
-      return {
-        error: false,
-        message: 'user register successfullly',
-        statusCode: 200,
-        data: data,
-      };
+
+      if (data) {
+        const token = jwt.sign(
+          { id: data._id, email: data.email },
+          process.env.JWT_SECRET_KEY,
+          { expiresIn: '7d' },
+        );
+
+        return {
+          error: false,
+          message: 'user register successfullly',
+          statusCode: 200,
+          token,
+          data: data,
+        };
+      }
     } catch (error) {
+      console.log(error);
       return {
         error: true,
         message: 'user already exists',
@@ -150,11 +169,9 @@ class UserService extends Service {
 
       return {
         error: false,
-        message: 'Password Reset Email Sent... Plice Check Your Email',
+        message: 'Password Reset Email Sent... please Check Your Email',
         statusCode: 200,
-        info: info,
         link: link,
-        data: user,
       };
     } catch (error) {
       return {

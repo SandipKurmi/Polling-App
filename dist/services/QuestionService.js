@@ -52,6 +52,7 @@ var QuestionService = /*#__PURE__*/function (_Service) {
     _this = _super.call(this, model);
     _this.getAllQuestions = _this.getAllQuestions.bind(_assertThisInitialized(_this));
     _this.createQuestions = _this.createQuestions.bind(_assertThisInitialized(_this));
+    _this.allNotification = _this.allNotification.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -214,6 +215,60 @@ var QuestionService = /*#__PURE__*/function (_Service) {
       }
 
       return getAllQuestions;
+    }()
+  }, {
+    key: "allNotification",
+    value: function () {
+      var _allNotification = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(req, res) {
+        var data;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
+                return this.model.find({
+                  isPrivate: false
+                }).populate({
+                  path: 'category',
+                  select: 'name '
+                }).populate({
+                  path: 'user',
+                  select: 'name image'
+                }).select(['questionTitle']);
+
+              case 3:
+                data = _context3.sent;
+                return _context3.abrupt("return", {
+                  error: false,
+                  message: 'request successfully',
+                  statusCode: 200,
+                  data: data
+                });
+
+              case 7:
+                _context3.prev = 7;
+                _context3.t0 = _context3["catch"](0);
+                return _context3.abrupt("return", {
+                  error: true,
+                  message: _context3.t0.message,
+                  statusCode: 400,
+                  data: null
+                });
+
+              case 10:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this, [[0, 7]]);
+      }));
+
+      function allNotification(_x5, _x6) {
+        return _allNotification.apply(this, arguments);
+      }
+
+      return allNotification;
     }()
   }]);
 
