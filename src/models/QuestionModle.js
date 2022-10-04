@@ -10,10 +10,12 @@ class QuestionModel {
           type: String,
           default: null,
         },
-        options: {
-          type: [String],
-          default: null,
-        },
+        options: [
+          {
+            label: String,
+            _id: false,
+          },
+        ],
         isPrivate: {
           type: Boolean,
           default: false,
