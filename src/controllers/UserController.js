@@ -13,6 +13,7 @@ class UserController extends Controller {
     this.changePassword = this.changePassword.bind(this);
     this.forgotPassword = this.forgotPassword.bind(this);
     this.userPasswordReset = this.userPasswordReset.bind(this);
+    this.userFollow = this.userFollow.bind(this);
   }
 
   // async getUserSuggetions(req, res) {
@@ -45,6 +46,11 @@ class UserController extends Controller {
 
   async userPasswordReset(req, res) {
     const response = await this.service.userPasswordReset(req, res);
+    return res.status(response.statusCode).send(response);
+  }
+
+  async userFollow(req, res) {
+    const response = await this.service.userFollow(req, res);
     return res.status(response.statusCode).send(response);
   }
 }

@@ -34,23 +34,21 @@ class UserModel {
           required: [true, 'Please add a Password'],
           minlength: 6,
         },
+        dateOfBirth: {
+          type: Date,
+          default: null,
+          // trim: true,
+        },
+        gender: {
+          type: String,
+          enum: ['Male', 'Female'],
+        },
         image: {
           type: String,
           default:
             'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png',
         },
-        followers: {
-          type: Number,
-          default: 0,
-        },
-        // followers: {
-        //   type: Array,
-        //   default: [],
-        // },
-        // followings: {
-        //   type: Array,
-        //   default: [],
-        // },
+        followers: [{ type: Schema.ObjectId, ref: 'users' }],
         isAdmin: {
           type: Boolean,
           default: false,

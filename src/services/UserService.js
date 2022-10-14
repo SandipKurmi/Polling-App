@@ -2,6 +2,7 @@ import Service from './Service';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import transporter from '../config/emailConfig';
+import { verify } from 'jsonwebtoken';
 
 class UserService extends Service {
   constructor(model) {
@@ -11,6 +12,36 @@ class UserService extends Service {
     this.changePassword = this.changePassword.bind(this);
     this.forgotPassword = this.forgotPassword.bind(this);
     this.userPasswordReset = this.userPasswordReset.bind(this);
+    this.userFollow = this.userFollow.bind(this);
+  }
+
+  //user follow
+  async userFollow(req, res) {
+    try {
+      if (req.headers.authorization) {
+        const token = req.headers.authorization.replace('Bearer ', '');
+        const decoded = verify(token, process.env.JWT_SECRET_KEY);
+        const { id } = decoded;
+        console.log(id);
+        const user = await this.model.findOne(id);
+        console.log(user);
+
+        return {
+          error: false,
+          message: 'user follow successfullly',
+          statusCode: 200,
+          token,
+          data: data,
+        };
+      }
+    } catch (error) {
+      return {
+        error: true,
+        message: error.massage,
+        statusCode: 400,
+        data: null,
+      };
+    }
   }
 
   //register user
@@ -44,7 +75,6 @@ class UserService extends Service {
         };
       }
     } catch (error) {
-      console.log(error);
       return {
         error: true,
         message: 'user already exists',

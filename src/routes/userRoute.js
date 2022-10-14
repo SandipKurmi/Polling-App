@@ -13,6 +13,7 @@ export default (router) => {
 
   //Protacted Route
   router.get(`/api/user`, auth, UserController.getAll);
+  router.put(`/api/followers`, auth, UserController.userFollow);
   router.get(`/api/user/:id`, auth, UserController.get);
   router.put(`/api/user/:id`, auth, UserController.update);
   router.delete(`/api/user/:id`, auth, UserController.delete);
